@@ -3,8 +3,8 @@ from typing import Tuple
 import pandas as pd
 from statsmodels.tsa.holtwinters import SimpleExpSmoothing
 from statsmodels.tsa.statespace.sarimax import SARIMAX
-from tube.base.Block import Block
-from tube.types.Dataset import Dataset
+from pipeworker.base.Block import Block
+from pipeworker.types.Dataset import Dataset
 
 
 class LoadData(Block):
