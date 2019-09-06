@@ -1,13 +1,14 @@
 from datetime import datetime
 from typing import Tuple
+
 import pandas as pd
 from statsmodels.tsa.holtwinters import SimpleExpSmoothing
 from statsmodels.tsa.statespace.sarimax import SARIMAX
-from pipeworker.base.Block import Block
-from pipeworker.types.Dataset import Dataset
+from pipeworker.base import Node
+from pipeworker.types import Dataset
 
 
-class LoadData(Block):
+class LoadData(Node):
     def execute(self, _):
         data_frame = pd.read_csv(
             "air_passangers.csv",
@@ -21,14 +22,14 @@ class LoadData(Block):
         return Dataset(data_frame)
 
 
-class FillNaN(Block):
+class FillNaN(Node):
     def execute(self, dataset: Dataset) -> Dataset:
         return dataset.update(
             data=dataset.data.interpolate()
         )
 
 
-class SES(Block):
+class SES(Node):
     def execute(self, dataset: Dataset) -> Dataset:
         model = SimpleExpSmoothing(dataset.train.passengers)
         model_fit = model.fit()
@@ -39,7 +40,7 @@ class SES(Block):
         )
 
 
-class SARIMA(Block):
+class SARIMA(Node):
     def __init__(self, order: Tuple[int, int, int], seasonal_order: Tuple[int, int, int, int]):
         self.seasonal_order = seasonal_order
         self.order = order

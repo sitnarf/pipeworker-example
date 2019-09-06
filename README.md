@@ -24,7 +24,7 @@ Pipeworker requires Python >= 3.7
 
 ## Description
 
-It  contains simple models with example dataset. In `example.py` is defined the pipeline and in `blocks.py` corresponding blocks used in the pipeline.
+It  contains simple models with example dataset. In `example.py` is defined the pipeline and in `nodes.py` corresponding nodes used in the pipeline.
 
 ```python
 pipe = Pipeline(
@@ -44,7 +44,7 @@ pipe = Pipeline(
 result = pipe.execute()
 ```
 
-LoadData block loads `air_passengers.csv` dataset. The pipeline trains three models, perform forecast and then evaluates their performence with two error measures (mae and mape). Last block compares mape among the three models. 
+LoadData node loads `air_passengers.csv` dataset. The pipeline trains three models, perform forecast and then evaluates their performence with two error measures (mae and mape). Last node compares mape among the three models. 
 
 Output:
 
